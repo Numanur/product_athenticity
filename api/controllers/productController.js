@@ -36,7 +36,7 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
     const id = req.params.id;
     try {
-        await Product.findByIdAndDelete(id);
+        await Product.deleteOne({ tempId: id });
         res.status(200).json({
             success: true,
             message: "Product has been deleted!"
@@ -47,9 +47,10 @@ const deleteProduct = async (req, res, next) => {
 }
 
 const getSingleProduct = async (req, res, next) => {
-    const id = req.params.id;
     try {
-        const product = await Product.find({ tempId: id });
+        const id = req.params.id;
+        const product = await Product.findOne({ tempId: id });
+
         res.status(200).json({
             success: true,
             product
