@@ -11,8 +11,6 @@ const createProduct = async (req, res, next) => {
             barcodeImage: barcodeImageBuffer
         }
 
-        console.log(newProductObj);
-
         const newProduct = new Product(newProductObj);
         const product = await newProduct.save();
 
