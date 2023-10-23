@@ -1,14 +1,25 @@
 const Product = require('../models/Product');
-const { barcodeGenerator } = require('../utils/barcodeGenerator');
+// const { barcodeGenerator } = require('../utils/barcodeGenerator');
+const JsBarcode = require('jsbarcode');
+const { createCanvas } = require("canvas");
 
 const createProduct = async (req, res, next) => {
 
     try {
-        const barcodeImageBuffer = barcodeGenerator(req.body.productId);
+        // const barcodeImageBuffer = barcodeGenerator(req.body.productId);
+        const canvas = createCanvas();
+
+        JsBarcode(canvas, req.body.productId, {
+            format: 'CODE128',
+            displayValue: true,
+            fontSize: 16,
+        });
+
+        const barcodeImageBuffer = canvas.toBuffer();
 
         const newProductObj = {
             ...req.body,
-            barcodeImage: barcodeImageBuffer
+            barcodeImage: barcodeImageBuffer.toString('base64')
         }
 
         const newProduct = new Product(newProductObj);
