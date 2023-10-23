@@ -1,14 +1,14 @@
 const Product = require('../models/Product');
-const { barcodeGenerator } = require('../utils/barcodeGenerator');
+// const { barcodeGenerator } = require('../utils/barcodeGenerator');
 
 const createProduct = async (req, res, next) => {
 
     try {
-        const barcodeImageBuffer = barcodeGenerator(req.body.productId);
+        // const barcodeImageBuffer = barcodeGenerator(req.body.productId);
 
         const newProductObj = {
             ...req.body,
-            barcodeImage: barcodeImageBuffer
+            barcodeImage: "barcodeImageBuffer"
         }
 
         const newProduct = new Product(newProductObj);
