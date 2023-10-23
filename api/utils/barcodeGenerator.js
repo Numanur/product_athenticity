@@ -1,5 +1,5 @@
 const JsBarcode = require('jsbarcode');
-var { createCanvas } = require("canvas");
+const { createCanvas } = require("canvas");
 
 const barcodeGenerator = (barcodeId) => {
     const canvas = createCanvas();
@@ -17,4 +17,4 @@ const barcodeGenerator = (barcodeId) => {
     // res.send(barcodeImageBuffer);
 };
 
-module.exports = barcodeGenerator;
+module.exports = { barcodeGenerator };

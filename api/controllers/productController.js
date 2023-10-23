@@ -1,5 +1,5 @@
 const Product = require('../models/Product');
-const barcodeGenerator = require('../utils/barcodeGenerator');
+const { barcodeGenerator } = require('../utils/barcodeGenerator');
 
 const createProduct = async (req, res, next) => {
 
