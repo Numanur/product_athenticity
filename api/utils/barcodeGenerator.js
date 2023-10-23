@@ -1,20 +1,20 @@
-// const JsBarcode = require('jsbarcode');
-// const { createCanvas } = require("canvas");
+const JsBarcode = require('jsbarcode');
+const { createCanvas } = require("canvas");
 
-// const barcodeGenerator = (barcodeId) => {
-//     const canvas = createCanvas();
+const barcodeGenerator = (barcodeId) => {
+    const canvas = createCanvas();
 
-//     JsBarcode(canvas, barcodeId, {
-//         format: 'CODE128',
-//         displayValue: true,
-//         fontSize: 16,
-//     });
+    JsBarcode(canvas, barcodeId, {
+        format: 'CODE128',
+        displayValue: true,
+        fontSize: 16,
+    });
 
-//     const barcodeImageBuffer = canvas.toBuffer();
-//     return barcodeImageBuffer.toString('base64');
+    const barcodeImageBuffer = canvas.toBuffer();
+    return barcodeImageBuffer.toString('base64');
 
-//     // res.type('image/png');
-//     // res.send(barcodeImageBuffer);
-// };
+    // res.type('image/png');
+    // res.send(barcodeImageBuffer);
+};
 
-// module.exports = { barcodeGenerator };
+module.exports = { barcodeGenerator };
