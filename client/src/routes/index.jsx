@@ -18,9 +18,11 @@ const Index = () => {
 
     const Layout = () => {
         return (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col">
                 <Navbar />
-                <Outlet />
+                <div className='w-full min-h-[87.3vh] bg-slate-200'>
+                    <Outlet />
+                </div>
                 <Footer />
                 <ToastContainer />
             </div>
@@ -41,7 +43,7 @@ const Index = () => {
                     element: <Products />,
                 },
                 {
-                    path: "/product/:id",
+                    path: "/products/:id",
                     element: <Product />,
                 },
                 {
