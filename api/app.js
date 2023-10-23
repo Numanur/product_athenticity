@@ -19,6 +19,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
+// create barcode
+app.get('/', (req, res) => {
+    res.send({
+        success: true,
+        message: 'All are set perfectly'
+    });
+});
+
 // default route
 app.get('/', (req, res) => {
     res.status(200).json({

@@ -5,8 +5,8 @@ const ProductSchema = mongoose.Schema(
         title: { type: String, required: true, unique: true },
         desc: { type: String, required: true, },
         price: { type: String, required: true },
-        tempId: { type: String, required: true },
-
+        productId: { type: String, required: true, unique: true },
+        barcodeImage: { type: String }
     },
     { timestamps: true }
 );

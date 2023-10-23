@@ -1,13 +1,25 @@
 const Product = require('../models/Product');
+const barcodeGenerator = require('../utils/barcodeGenerator');
 
 const createProduct = async (req, res, next) => {
-    const newProduct = new Product(req.body);
 
     try {
-        await newProduct.save();
+        const barcodeImageBuffer = barcodeGenerator(req.body.productId);
+
+        const newProductObj = {
+            ...req.body,
+            barcodeImage: barcodeImageBuffer
+        }
+
+        console.log(newProductObj);
+
+        const newProduct = new Product(newProductObj);
+        const product = await newProduct.save();
+
         res.status(201).json({
             success: true,
-            message: "Product created successfully"
+            message: "Product created successfully",
+            product
         });
     } catch (err) {
         next(err);
@@ -36,7 +48,7 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
     const id = req.params.id;
     try {
-        await Product.deleteOne({ tempId: id });
+        await Product.deleteOne({ productId: id });
         res.status(200).json({
             success: true,
             message: "Product has been deleted!"
@@ -49,7 +61,7 @@ const deleteProduct = async (req, res, next) => {
 const getSingleProduct = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const product = await Product.findOne({ tempId: id });
+        const product = await Product.findOne({ productId: id });
 
         res.status(200).json({
             success: true,
