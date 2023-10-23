@@ -1,11 +1,13 @@
 const Product = require('../models/Product');
 const JsBarcode = require('jsbarcode');
-const { createCanvas } = require("canvas");
+// const { createCanvas } = require("canvas");
+const Canvas = require("canvas");
 
 const createProduct = async (req, res, next) => {
 
     try {
-        const canvas = createCanvas();
+        // const canvas = createCanvas();
+        const canvas = new Canvas();
 
         JsBarcode(canvas, req.body.productId, {
             format: 'CODE128',
