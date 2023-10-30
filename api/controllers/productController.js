@@ -3,8 +3,6 @@ const barcodeGenerator = require('../utils/barcodeGenerator');
 const { v4: uuidv4 } = require('uuid');
 
 const createProduct = async (req, res, next) => {
-    console.log(req.body);
-
     try {
         const {
             productName, description, category, brand, price, weight,

@@ -3,34 +3,34 @@ const mongoose = require("mongoose");
 const ProductSchema = mongoose.Schema(
     {
         basicDetails: {
-            productName: { type: String, required: true },
+            productName: { type: String },
             description: { type: String },
-            category: { type: String, required: true },
-            brand: { type: String, required: true },
-            price: { type: Number, required: true },
-            weight: { type: String, required: true },
-            productImg: { type: String, required: true },
-            origin: { type: String, required: true }
+            category: { type: String },
+            brand: { type: String },
+            price: { type: Number },
+            weight: { type: String },
+            productImg: { type: String },
+            origin: { type: String }
         },
         tracking: {
-            barcode: { type: String, required: true },
-            serialNumber: { type: String, required: true },
+            barcode: { type: String },
+            serialNumber: { type: String },
         },
         vendorDetails: {
-            vendorName: { type: String, required: true },
-            vendorCode: { type: String, required: true },
+            vendorName: { type: String },
+            vendorCode: { type: String },
             vendorContactInfo: {
                 address: { type: String },
                 phone: { type: String }
             }
         },
         expiration: {
-            manufacturingDate: { type: String, required: true },
-            expirationDate: { type: String, required: true }
+            manufacturingDate: { type: String },
+            expirationDate: { type: String }
         },
         compilanceInfo: {
-            compilanceCertificate: { type: String, required: true },
-            safetyInfo: { type: String, required: true }
+            compilanceCertificate: { type: String },
+            safetyInfo: { type: String }
         }
     },
     { timestamps: true }
