@@ -1,25 +1,51 @@
 const Product = require('../models/Product');
-// const JsBarcode = require('jsbarcode');
-// const { createCanvas } = require("canvas");
-// const Canvas = require("canvas");
+const barcodeGenerator = require('../utils/barcodeGenerator');
+const { v4: uuidv4 } = require('uuid');
 
 const createProduct = async (req, res, next) => {
+    console.log(req.body);
 
     try {
-        // const canvas = createCanvas();
-        // const canvas = new Canvas();
+        const {
+            productName, description, category, brand, price, weight,
+            origin, vendorName, vendorCode, address, phone,
+            compilanceCertificate, safetyInfo, manufacturingDate, expirationDate
+        } = req.body;
 
-        // JsBarcode(canvas, req.body.productId, {
-        //     format: 'CODE128',
-        //     displayValue: true,
-        //     fontSize: 16,
-        // });
+        let serialNumber;
+        if (req.body.serialNumber) {
+            serialNumber = req.body.serialNumber;
+        } else {
+            let id = uuidv4();
+            let arr = id.split('-');
+            serialNumber = arr[arr.length - 1];
+        }
 
-        // const barcodeImageBuffer = canvas.toBuffer();
+        const barcodeImageBuffer = barcodeGenerator(serialNumber);
+
+        const productImg = 'https://static.ohsogo.com/media/catalog/product/cache/e8e097f5396d8dde6be5d5b8f2e70ffa/c/l/clear-cool-sport-menthol_180ml_fop.jpg';
 
         const newProductObj = {
-            ...req.body,
-            barcodeImage: "barcodeImageBuffer.toString('base64')"
+            basicDetails: {
+                productName, description, category, brand,
+                price, weight, productImg, origin
+            },
+            tracking: {
+                barcode: barcodeImageBuffer.toString('base64'),
+                serialNumber
+            },
+            vendorDetails: {
+                vendorName, vendorCode,
+                vendorContactInfo: {
+                    address, phone
+                }
+            },
+            expiration: {
+                manufacturingDate, expirationDate
+            },
+            compilanceInfo: {
+                compilanceCertificate, safetyInfo
+            }
         }
 
         const newProduct = new Product(newProductObj);
@@ -38,8 +64,8 @@ const createProduct = async (req, res, next) => {
 const updateProduct = async (req, res, next) => {
     const id = req.params.id;
     try {
-        await Product.findByIdAndUpdate(
-            id,
+        await Product.updateMany(
+            { serialNumber: id },
             {
                 $set: req.body,
             },
@@ -57,7 +83,7 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
     const id = req.params.id;
     try {
-        await Product.deleteOne({ productId: id });
+        await Product.deleteOne({ serialNumber: id });
         res.status(200).json({
             success: true,
             message: "Product has been deleted!"
@@ -70,7 +96,7 @@ const deleteProduct = async (req, res, next) => {
 const getSingleProduct = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const product = await Product.findOne({ productId: id });
+        const product = await Product.findOne({ 'tracking.serialNumber': id });
 
         res.status(200).json({
             success: true,
@@ -82,7 +108,6 @@ const getSingleProduct = async (req, res, next) => {
 }
 
 const getAllProduct = async (req, res, next) => {
-    const id = req.params.id;
     try {
         const products = await Product.find({});
         res.status(200).json({
