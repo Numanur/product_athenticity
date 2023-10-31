@@ -27,6 +27,7 @@ const ProductCard = ({ product }) => {
                 <span>Price: {product.basicDetails.price}tk.</span>
                 <span>Weight: {product.basicDetails.weight}</span>
                 <span>Origin: {product.basicDetails.origin}</span>
+                <span className='capitalize'>Sell Status: {product.sellStatus}</span>
                 <span>Manufacturing Date: {product.expiration.manufacturingDate}</span>
                 <span>Expiration Date: {product.expiration.expirationDate}</span>
             </div>
