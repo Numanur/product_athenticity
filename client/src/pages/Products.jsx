@@ -1,6 +1,8 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react'
 import { publicRequest } from '../utils/makeRequest';
-const ProductCard = lazy(() => import('../components/ProductCard'));
+// const ProductCard = lazy(() => import('../components/ProductCard'));
+import ProductCard from '../components/ProductCard';
+import Loading from '../components/Loading';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
@@ -26,10 +28,10 @@ const Products = () => {
             <div className='w-full flex flex-wrap gap-4'>
                 {
                     products.length > 0 ? products.map(product => (
-                        <Suspense fallback={<div className='w-full h-[85vh] flex justify-center items-center text-2xl font-semibold'>Loading...</div>}>
-                            <ProductCard product={product} />
-                        </Suspense>
-                    )) : null
+                        <ProductCard product={product} />
+                    )) : (
+                        <Loading />
+                    )
                 }
             </div>
         </div>

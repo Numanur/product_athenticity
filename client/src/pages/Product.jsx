@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { publicRequest } from '../utils/makeRequest';
+import Loading from '../components/Loading';
 
 const Product = () => {
     const { id } = useParams();
@@ -59,9 +60,7 @@ const Product = () => {
                 </div>
             </div>
         ) : (
-            <div>
-                <span className='w-full h-[85vh] flex justify-center items-center text-2xl font-semibold'>Loading...</span>
-            </div>
+            <Loading />
         )
     )
 }
