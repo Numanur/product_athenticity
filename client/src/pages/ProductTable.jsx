@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { publicRequest } from '../utils/makeRequest';
 import { productColumns } from '../utils/TableSource';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 const ProductTable = () => {
     const [products, setProducts] = useState([]);
@@ -52,7 +52,7 @@ const ProductTable = () => {
         {
             field: "action",
             headerName: "Action",
-            width: 200,
+            width: 120,
             renderCell: (params) => {
                 return (
                     <div
@@ -67,17 +67,25 @@ const ProductTable = () => {
     ]
 
     return (
-        <div>
-            <DataGrid
-                rows={products}
-                columns={productColumns.concat(actionColumn)}
-                disableRowSelectionOnClick
-                disableSelectionOnClick
-                pageSize={10}
-                getRowId={row => row._id}
-                rowsPerPageOptions={[5]}
-                checkboxSelection
-            />
+        <div className='w-full h-[85vh] px-4 flex justify-center'>
+            <div>
+                {
+                    products.length > 0 ? (
+                        <DataGrid
+                            rows={products}
+                            columns={productColumns.concat(actionColumn)}
+                            disableRowSelectionOnClick
+                            disableSelectionOnClick
+                            pageSize={10}
+                            getRowId={row => row._id}
+                            rowsPerPageOptions={[5]}
+                            checkboxSelection
+                        />
+                    ) : (
+                        <Loading />
+                    )
+                }
+            </div>
         </div>
     )
 }

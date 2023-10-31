@@ -4,44 +4,37 @@ export const productColumns = [
     {
         field: "productName",
         headerName: "Product Name",
-        width: 180,
+        width: 280,
     },
     {
         field: "serialNumber",
         headerName: "Product Id",
         width: 180,
     },
-    // {
-    //     field: "productImg",
-    //     headerName: "Prouct Image",
-    //     width: 160,
-    //     renderCell: (params) => {
-    //         return (
-    //             <div className="cellWithImg">
-    //                 <img className="cellImg" src={params.row.productImg || DEFAULT_IMG_URL} alt="avatar" />
-    //             </div>
-    //         );
-    //     },
-    // },
     {
         field: "category",
         headerName: "Category",
-        width: 110,
+        width: 180,
     },
     {
         field: "weight",
         headerName: "Weight",
-        width: 110,
+        width: 140,
     },
     {
         field: "price",
         headerName: "Price",
-        width: 90,
+        width: 140,
+        renderCell: (params) => {
+            return (
+                <span>{`\u09F3${params.row.price}`}</span>
+            )
+        }
     },
     {
         field: "sellStatus",
         headerName: "Sell Status",
-        width: 100,
+        width: 140,
         renderCell: (params) => {
             return (
                 <div
