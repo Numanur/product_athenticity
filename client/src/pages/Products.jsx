@@ -19,18 +19,25 @@ const Products = () => {
     }, []);
 
     return (
-        <div className='px-7 pb-7'>
-            <h1 className='text-center my-6 text-2xl font-bold'>
-                Products Showcase
-            </h1>
-            <div className='w-full flex flex-wrap gap-4'>
-                {
-                    products.length > 0 ? products.map(product => (
-                        <ProductCard product={product} />
-                    )) : null
-                }
+        products.length > 0 ? (
+            <div className='px-7 pb-7'>
+                <h1 className='text-center my-6 text-2xl font-bold'>
+                    Products Showcase
+                </h1>
+                <div className='w-full flex flex-wrap gap-4'>
+                    {
+                        products.length > 0 ? products.map(product => (
+                            <ProductCard product={product} />
+                        )) : null
+                    }
+                </div>
             </div>
-        </div>
+        ) : (
+            <div>
+                <span className='w-full h-[85vh] flex justify-center items-center text-2xl font-semibold'>Loading...</span>
+            </div>
+        )
+
     )
 }
 
