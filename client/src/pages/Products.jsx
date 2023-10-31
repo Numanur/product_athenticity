@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { publicRequest } from '../utils/makeRequest';
 import ProductCard from '../components/ProductCard';
 
-
 const Products = () => {
     const [products, setProducts] = useState([]);
 

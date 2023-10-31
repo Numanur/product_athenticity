@@ -13,18 +13,23 @@ const ProductCard = ({ product }) => {
         <div
             className='w-[32%] bg-slate-500 text-white p-4 rounded-lg cursor-pointer flex flex-col gap-7'
             key={product._id}
-            onClick={() => handleNavigate(product.productId)}
+            onClick={() => handleNavigate(product.tracking.serialNumber)}
         >
-            <div className='flex flex-col gap-2'>
-                <h2>Product Name: {product.title}</h2>
-                <span>ProductPrice: {product.price}</span>
-                <p>Description: {product.desc}</p>
-            </div>
             <img
-                src={`data:image/png;base64,${product.barcodeImage}`}
-                alt="Barcode"
-                className='w-full aspect-[16/7]'
+                src={product.basicDetails.productImg}
+                alt="product imgage"
+                className='w-full aspect-video'
             />
+            <div className='flex flex-col gap-2'>
+                <h1>Product Name: {product.basicDetails.productName}</h1>
+                <p>Description: {product.basicDetails.description}</p>
+                <span>Brand: {product.basicDetails.brand}</span>
+                <span>Price: {product.basicDetails.price}tk.</span>
+                <span>Weight: {product.basicDetails.weight}</span>
+                <span>Origin: {product.basicDetails.origin}</span>
+                <span>Manufacturing Date: {product.expiration.manufacturingDate}</span>
+                <span>Expiration Date: {product.expiration.expirationDate}</span>
+            </div>
         </div>
     )
 }

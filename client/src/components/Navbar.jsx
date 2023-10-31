@@ -3,20 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <div className='w-full bg-green-600 text-white px-7 py-4 flex justify-between gap-4'>
+        <div className='w-full bg-green-600 text-white px-7 py-4 flex justify-center gap-7'>
             <Link to='/'>
-                <span className='text-lg font-bold cursor-pointer'>BlockChain</span>
+                <span className='text-lg cursor-pointer'>BlockChain</span>
             </Link>
-            <ul className='flex gap-4'>
-                <Link to='/'>
-                    <li>Home</li>
-                </Link>
-                <Link to='/products'>
-                    <li>Products</li>
-                </Link>
-            </ul>
+            <Link to='/products'>
+                <span className='text-lg cursor-pointer'>Products</span>
+            </Link>
         </div>
     )
 }
 
-export default Navbar
+export default Navbar;
