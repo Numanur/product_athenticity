@@ -24,9 +24,7 @@ const Product = () => {
         Object.keys(product).length > 0 ? (
             <div className='px-7 pb-7 flex flex-col items-center gap-7'>
                 <h1 className='text-center my-4 text-2xl font-bold'>{product?.basicDetails?.productName}</h1>
-                <div
-                    className='w-3/5 bg-slate-500 text-white p-4 rounded-lg cursor-pointer flex gap-7'
-                >
+                <div className='w-3/5 bg-slate-500 text-white p-4 rounded-lg cursor-pointer flex gap-7'>
                     <div className='w-3/5 flex flex-col gap-2'>
                         <h1>Product Name: {product?.basicDetails?.productName}</h1>
                         <p>Description: {product?.basicDetails?.description}</p>
@@ -45,17 +43,21 @@ const Product = () => {
                         <p>Compilance Certificate: {product?.compilanceInfo?.compilanceCertificate}</p>
                         <p>Safety Information: {product?.compilanceInfo?.safetyInfo}</p>
                     </div>
-                    <div className='w-2/5'>
-                        <img
-                            src={product?.basicDetails?.productImg}
-                            alt="product image"
-                            className='w-full h-full object-cover'
-                        />
-                        {/* <img
-                            src={`data:image/png;base64,${product.barcodeImage}`}
-                            alt="Barcode"
-                            className='w-full aspect-[16/7]'
-                        /> */}
+                    <div className='w-2/5 flex flex-col gap-4'>
+                        <div className='w-full flex-1'>
+                            <img
+                                src={product?.basicDetails?.productImg}
+                                alt="product image"
+                                className='w-full h-full object-cover'
+                            />
+                        </div>
+                        <div className='w-full'>
+                            <img
+                                src={`data:image/png;base64,${product.tracking.barcode}`}
+                                alt="Barcode"
+                                className='w-full aspect-video'
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
