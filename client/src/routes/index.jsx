@@ -7,6 +7,7 @@ const Home = lazy(() => import('../pages/Home'));
 const Products = lazy(() => import('../pages/Products'));
 const Product = lazy(() => import('../pages/Product'));
 const ProductTable = lazy(() => import('../pages/ProductTable'));
+const NewProduct = lazy(() => import('../pages/NewProduct'));
 const Error = lazy(() => import('../pages/Error'));
 
 import Loading from '../components/Loading';
@@ -52,6 +53,10 @@ const Index = () => {
                 {
                     path: "/products-table",
                     element: <ProductTable />,
+                },
+                {
+                    path: "/products/new",
+                    element: <NewProduct />,
                 },
                 {
                     path: "*",

@@ -13,6 +13,9 @@ const Navbar = () => {
             <Link to='/products-table'>
                 <span className='text-lg cursor-pointer'>Products Table</span>
             </Link>
+            <Link to='/products/new'>
+                <span className='text-lg cursor-pointer'>Add Product</span>
+            </Link>
         </div>
     )
 }
