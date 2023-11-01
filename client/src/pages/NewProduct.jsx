@@ -11,6 +11,7 @@ import {
     getDownloadURL
 } from "firebase/storage";
 import app from "../config/firebase";
+import { publicRequest } from '../utils/makeRequest';
 
 const NewProduct = () => {
     const [newProduct, setNewProduct] = useState({
@@ -31,56 +32,79 @@ const NewProduct = () => {
     const [uploaded, setUploaded] = useState(0);
     const navigate = useNavigate();
 
+    const {
+        productName, description, category, brand,
+        price, weight, productImg, origin,
+        serialNumber, manufacturingDate, expirationDate,
+    } = newProduct;
+
     // file upload using firebase
-    // const handleUpload = (e) => {
-    //     e.preventDefault();
+    const handleUpload = (e) => {
+        e.preventDefault();
 
-    //     if (!file?.name) {
-    //         return toast.warn("Select Profile Picture!", { autoClose: 3000 });
-    //     }
+        if (!file?.name) {
+            return toast.warn("Select Profile Picture!", { autoClose: 3000 });
+        }
 
-    //     setFileLoading(true);
+        setFileLoading(true);
 
-    //     // firebase setup
-    //     const fileName = new Date().getTime() + file.name;
-    //     const storage = getStorage(app);
+        // firebase setup
+        const fileName = new Date().getTime() + file.name;
+        const storage = getStorage(app);
 
-    //     const storageRef = ref(storage, `/BlockchainProduct/${fileName}`);
-    //     const uploadTask = uploadBytesResumable(storageRef, file);
+        const storageRef = ref(storage, `/BlockchainProduct/${fileName}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
 
-    //     uploadTask.on('state_changed',
-    //         (snapshot) => {
-    //             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //             console.log('Upload is ' + progress + '% done');
-    //         },
-    //         (err) => {
-    //             // Handle unsuccessful uploads
-    //             console.log(err.message);
-    //         },
-    //         () => {
-    //             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-    //                 setNewProduct(prev => {
-    //                     return {
-    //                         ...prev,
-    //                         "productImg": downloadURL
-    //                     }
-    //                 });
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+            },
+            (err) => {
+                // Handle unsuccessful uploads
+                console.log(err.message);
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setNewProduct(prev => {
+                        return {
+                            ...prev,
+                            "productImg": downloadURL
+                        }
+                    });
 
-    //                 setFileLoading(false);
-    //                 setUploaded(prev => prev + 1);
-    //             });
-    //         }
-    //     );
-    // };
+                    setFileLoading(false);
+                    setUploaded(prev => prev + 1);
+                });
+            }
+        );
+    };
 
     // handle submit
     const handleSubmit = async (e) => {
-        console.log(newProduct);
+        const dataFormate = (date) => {
+            return date.split('-').reverse().join('/');
+        }
+
+        const product = {
+            productName, description, category, brand, price,
+            weight, origin, productImg, serialNumber,
+            manufacturingDate: dataFormate(manufacturingDate),
+            expirationDate: dataFormate(expirationDate)
+        };
+
+        try {
+            const res = await publicRequest.post('/products/create', product);
+            console.log(res.data);
+            res.data.success && navigate('/products-table');
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
         <div className='w-full p-7'>
-            <div className='shadow-lg p-5 flex gap-4'>
+            <div className='shadow-lg p-4 py-6 flex gap-4 bg-[#fff]'>
                 <div className='w-2/6 flex flex-col items-center justify-between'>
                     <label htmlFor='file'>
                         <img
@@ -103,7 +127,7 @@ const NewProduct = () => {
                         ) : (
                             <button
                                 className="bg-amber-400 text-white text-base py-2 px-4 rounded"
-                            // onClick={handleUpload}
+                                onClick={handleUpload}
                             >
                                 Upload
                             </button>

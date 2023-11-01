@@ -1,6 +1,5 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { publicRequest } from '../utils/makeRequest';
-// const ProductCard = lazy(() => import('../components/ProductCard'));
 import ProductCard from '../components/ProductCard';
 import Loading from '../components/Loading';
 

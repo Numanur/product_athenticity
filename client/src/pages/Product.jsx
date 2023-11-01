@@ -52,13 +52,13 @@ const Product = () => {
                                 className='w-full h-full object-cover'
                             />
                         </div>
-                        <div className='w-full'>
+                        {/* <div className='w-full'>
                             <img
                                 src={`data:image/png;base64,${product.tracking.barcode}`}
                                 alt="Barcode"
                                 className='w-full aspect-video'
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

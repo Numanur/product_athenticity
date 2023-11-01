@@ -15,12 +15,6 @@ const ProductForm = ({ newProduct, setNewProduct, type, name, label }) => {
         ))
     }
 
-    // const {
-    //     productName, description, category, brand,
-    //     price, weight, productImg, origin,
-    //     serialNumber, manufacturingDate, expirationDate,
-    // } = newProduct;
-
     return (
         <div className='w-1/2 p-4 pt-1 mb-2'>
             <TextField
