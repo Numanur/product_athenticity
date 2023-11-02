@@ -48,20 +48,20 @@ const Index = () => {
                     element: <Products />,
                 },
                 {
-                    path: "/products/:id",
-                    element: <Product />,
-                },
-                {
-                    path: "/products-table",
-                    element: <ProductTable />,
-                },
-                {
                     path: "/products/new",
                     element: <NewProduct />,
                 },
                 {
                     path: "/products/undo",
                     element: <UndoProducts />,
+                },
+                {
+                    path: "/products/:id",
+                    element: <Product />,
+                },
+                {
+                    path: "/products-table",
+                    element: <ProductTable />,
                 },
                 {
                     path: "*",
