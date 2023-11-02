@@ -1,12 +1,13 @@
 import React, { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
-const Home = lazy(() => import("../pages/Home"));
-const Products = lazy(() => import("../pages/Products"));
-const Product = lazy(() => import("../pages/Product"));
-const ProductTable = lazy(() => import("../pages/ProductTable"));
-const NewProduct = lazy(() => import("../pages/NewProduct"));
-const Error = lazy(() => import("../pages/Error"));
+const Home = lazy(() => import('../pages/Home'));
+const Products = lazy(() => import('../pages/Products'));
+const Product = lazy(() => import('../pages/Product'));
+const ProductTable = lazy(() => import('../pages/ProductTable'));
+const NewProduct = lazy(() => import('../pages/NewProduct'));
+const UndoProducts = lazy(() => import('../pages/UndoProducts'));
+const Error = lazy(() => import('../pages/Error'));
 
 import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
@@ -44,28 +45,39 @@ const Index = () => {
         {
           path: "/",
           element: <Home />,
-        },
-        {
-          path: "/products",
-          element: <Products />,
-        },
-        {
-          path: "/products/:id",
-          element: <Product />,
-        },
-        {
-          path: "/products-table",
-          element: <ProductTable />,
-        },
-        {
-          path: "/products/new",
-          element: <NewProduct />,
-        },
-        {
-          path: "*",
-          element: <Error />,
-        },
-      ],
+
+            path: "/",
+            element: <Layout />,
+            children: [
+                {
+                    path: "/",
+                    element: <Home />,
+                },
+                {
+                    path: "/products",
+                    element: <Products />,
+                },
+                {
+                    path: "/products/new",
+                    element: <NewProduct />,
+                },
+                {
+                    path: "/products/undo",
+                    element: <UndoProducts />,
+                },
+                {
+                    path: "/products/:id",
+                    element: <Product />,
+                },
+                {
+                    path: "/products-table",
+                    element: <ProductTable />,
+                },
+                {
+                    path: "*",
+                    element: <Error />,
+                },
+            ],
     },
   ]);
 

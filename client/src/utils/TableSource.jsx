@@ -14,7 +14,7 @@ export const productColumns = [
     {
         field: "category",
         headerName: "Category",
-        width: 180,
+        width: 160,
     },
     {
         field: "weight",
@@ -24,7 +24,7 @@ export const productColumns = [
     {
         field: "price",
         headerName: "Price",
-        width: 140,
+        width: 120,
         renderCell: (params) => {
             return (
                 <span>{`\u09F3${params.row.price}`}</span>

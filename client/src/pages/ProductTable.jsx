@@ -36,20 +36,19 @@ const ProductTable = () => {
     fetchProducts();
   }, []);
 
-  const handleSell = async (serialNumber) => {
-    try {
-      const res = await publicRequest.put(`/products/${serialNumber}`);
-      res.data.success &&
-        setProducts((prev) => {
-          return prev.map((item) => {
-            return item.serialNumber === serialNumber
-              ? { ...item, sellStatus: "sold" }
-              : item;
-          });
-        });
-    } catch (err) {
-      console.log(err);
-    }
+    const handleSell = async (serialNumber, status) => {
+        if (status === 'sold') return '';
+
+        try {
+            const res = await publicRequest.put(`/products/${serialNumber}`);
+            res.data.success && setProducts(prev => {
+                return prev.map(item => {
+                    return item.serialNumber === serialNumber ? { ...item, sellStatus: 'sold' } : item;
+                });
+            });
+        } catch (err) {
+            console.log(err);
+        }
   };
 
   // create action column
@@ -64,8 +63,8 @@ const ProductTable = () => {
             className={`${
               params.row.sellStatus === "sold"
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-amber-400"
-            } text-white py-1 px-4 rounded cursor-pointer`}
+                : "bg-amber-400 cursor-pointer"
+            } text-white py-1 px-4 rounded`}
             onClick={() => handleSell(params.row.serialNumber)}
           >
             {params.row.sellStatus === "available" ? "Sell" : "Sold"}
