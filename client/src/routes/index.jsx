@@ -45,40 +45,33 @@ const Index = () => {
         {
           path: "/",
           element: <Home />,
-
-            path: "/",
-            element: <Layout />,
-            children: [
-                {
-                    path: "/",
-                    element: <Home />,
-                },
-                {
-                    path: "/products",
-                    element: <Products />,
-                },
-                {
-                    path: "/products/new",
-                    element: <NewProduct />,
-                },
-                {
-                    path: "/products/undo",
-                    element: <UndoProducts />,
-                },
-                {
-                    path: "/products/:id",
-                    element: <Product />,
-                },
-                {
-                    path: "/products-table",
-                    element: <ProductTable />,
-                },
-                {
-                    path: "*",
-                    element: <Error />,
-                },
-            ],
-    },
+        },
+        {
+          path: "/products",
+          element: <Products />,
+        },
+        {
+          path: "/products/new",
+          element: <NewProduct />,
+        },
+        {
+          path: "/products/undo",
+          element: <UndoProducts />,
+        },
+        {
+          path: "/products/:id",
+          element: <Product />,
+        },
+        {
+          path: "/products-table",
+          element: <ProductTable />,
+        },
+        {
+          path: "*",
+          element: <Error />,
+        },
+      ],
+    }
   ]);
 
   return (
