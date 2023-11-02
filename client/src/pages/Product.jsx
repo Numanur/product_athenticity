@@ -25,8 +25,8 @@ const Product = () => {
   return Object.keys(product).length > 0 ? (
     <div className="container py-10">
       <div>
-        <div className="flex gap-4 justify-center">
-          <div>
+        <div className="flex gap-4 justify-center bg-white p-4 rounded">
+          <div className="bg-slate-50">
             {product?.basicDetails?.productImg ? (
               <img
                 src={product?.basicDetails?.productImg}
@@ -40,11 +40,11 @@ const Product = () => {
             )}
           </div>
 
-          <div className="bg-white min-w-[500px] rounded p-5">
+          <div className=" min-w-[500px] rounded p-5 bg-slate-100">
             <h1 className="font-bold text-3xl px-2">
               {product?.basicDetails?.productName}
             </h1>
-            <div className="flex flex-col mt-4 bg-slate-100 rounded p-2">
+            <div className="flex flex-col mt-4 bg-white rounded p-2">
               <span>Category: {product?.basicDetails?.category}</span>
               <span>Brand: {product?.basicDetails?.brand}</span>
               <span>Price: {product?.basicDetails?.price} BDT</span>
