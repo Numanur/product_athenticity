@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { publicRequest } from "../utils/makeRequest";
 import Loading from "../components/Loading";
@@ -40,25 +40,26 @@ const Product = () => {
             )}
           </div>
 
-          <div className=" min-w-[500px] rounded p-5 bg-slate-100">
-            <h1 className="font-bold text-3xl px-2">
-              {product?.basicDetails?.productName}
-            </h1>
-            <div className="flex flex-col mt-4 bg-white rounded p-2">
-              <span>Category: {product?.basicDetails?.category}</span>
-              <span>Brand: {product?.basicDetails?.brand}</span>
-              <span>Price: {product?.basicDetails?.price} BDT</span>
-              <span>Weight: {product?.basicDetails?.weight}</span>
-              <span>Origin: {product?.basicDetails?.origin}</span>
+          <div className="flex flex-col justify-between min-w-[500px] rounded p-5 bg-slate-100">
+            <div className="flex flex-col gap-4">
+              <h1 className="font-bold text-3xl px-2">
+                {product?.basicDetails?.productName}
+              </h1>
+              <div className="flex flex-col bg-white rounded p-2">
+                <span>Category: {product?.basicDetails?.category}</span>
+                <span>Brand: {product?.basicDetails?.brand}</span>
+                <span>Price: {product?.basicDetails?.price} BDT</span>
+                <span>Weight: {product?.basicDetails?.weight}</span>
+                <span>Origin: {product?.basicDetails?.origin}</span>
+              </div>
             </div>
 
-            <div className="my-4">
+            <div className="">
               <button
-                className={`${
-                  product?.sellStatus == "available"
-                    ? "bg-emerald-100 text-emerald-600"
-                    : "bg-red-100 text-red-500 "
-                }  px-3 py-1 rounded text-lg font-semibold capitalize flex items-center justify-center`}
+                className={`${product?.sellStatus == "available"
+                  ? "bg-emerald-100 text-emerald-600"
+                  : "bg-red-100 text-red-500 "
+                  }  px-3 py-1 rounded text-lg font-semibold capitalize flex items-center justify-center`}
               >
                 <span>
                   {product?.sellStatus == "available" ? (
@@ -78,7 +79,7 @@ const Product = () => {
               <span>
                 <AiFillCheckCircle className="mr-1 mt-1 text-2xl text-lime-500" />
               </span>
-              Descripton
+              Description
             </h1>
             <hr />
             <div className="mt-3 w-1/2">
